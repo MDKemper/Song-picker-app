@@ -3,6 +3,7 @@
 <head>
   <title>Song Picker</title>
   <link rel="stylesheet" href="/static/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
   <h1>🎶 Pick a Song for Auggy Style</h1>
@@ -43,8 +44,8 @@
   <div style="text-align: center;">
     <h3>🎤 Suggest a Song for the Next Show</h3>
     <form method="POST" action="/suggest">
-      <input type="text" name="suggestion" placeholder="Enter a song title" style="width: 80%; max-width: 300px; padding: 10px;"><br><br>
-      <button type="submit">➕ Submit Suggestion</button>
+      <input type="text" name="suggestion" id="suggestionInput" placeholder="Enter a song title" style="width: 80%; max-width: 300px; padding: 10px;"><br><br>
+      <button type="submit" id="suggestBtn" disabled>➕ Submit Suggestion</button>
     </form>
   </div>
 
@@ -54,38 +55,88 @@
     </a>
   </div>
 
-<script>
-  function selectSong(index, name, isSelected) {
-    if (isSelected) {
-      const messages = [
-        "“Nice pick! We’ll queue it up — and nope, you can’t pick it again 😎”",
-        "“Song selected. That one’s taken — no backsies!”",
-        "“Good taste — but it's already in the queue!”",
-        "“You’re too late — somebody else beat you to it!”"
-      ];
-      const random = Math.floor(Math.random() * messages.length);
-      alert(messages[random]);
-      return;
+  <div style="text-align: center; margin-top: 10px;">
+    <a href="#" onclick="promptAdminLogin()" style="text-decoration: none; color: #0078d4;">
+      🔐 Admin Login
+    </a>
+  </div>
+
+  <script>
+    function selectSong(index, name, isSelected) {
+      if (isSelected) {
+        const messages = [
+          "“Nice pick! We’ll queue it up — and nope, you can’t pick it again 😎”",
+          "“Song selected. That one’s taken — no backsies!”",
+          "“Good taste — but it's already in the queue!”",
+          "“You’re too late — somebody else beat you to it!”"
+        ];
+        const random = Math.floor(Math.random() * messages.length);
+        alert(messages[random]);
+        return;
+      }
+
+      document.querySelector('.song-list').style.display = "none";
+      document.getElementById("confirmation").style.display = "block";
+      document.getElementById("songIndex").value = index;
+      document.getElementById("selectedSong").innerText = "🎵 You selected: " + name;
     }
 
-    document.querySelector('.song-list').style.display = "none";
-    document.getElementById("confirmation").style.display = "block";
-    document.getElementById("songIndex").value = index;
-    document.getElementById("selectedSong").innerText = "🎵 You selected: " + name;
-  }
-
-  function tipBand() {
-    document.getElementById("tippedValue").value = "true";
-    window.open("https://venmo.com/AuggyStyle", "_blank");
-  }
-
-  // 🔁 Update interval set to 10 seconds (10,000 milliseconds)
-  setInterval(() => {
-    if (document.getElementById("confirmation").style.display !== "block") {
-      window.location.reload();
+    function tipBand() {
+      document.getElementById("tippedValue").value = "true";
+      window.open("https://venmo.com/AuggyStyle", "_blank");
     }
-  }, 10000);
-</script>
 
+    function promptAdminLogin() {
+      const pin = prompt("Enter Admin PIN:");
+      if (pin) {
+        window.location.href = `/admin?admin_pin=${encodeURIComponent(pin)}`;
+      }
+    }
+
+    // Auto-refresh unless confirmation screen is active
+    setInterval(() => {
+      if (document.getElementById("confirmation").style.display !== "block") {
+        window.location.reload();
+      }
+    }, 10000);
+
+    // Suggestion form logic
+    const suggestionInput = document.getElementById("suggestionInput");
+    const suggestBtn = document.getElementById("suggestBtn");
+
+    if (suggestionInput && suggestBtn) {
+      suggestBtn.disabled = suggestionInput.value.trim() === "";
+
+      suggestionInput.addEventListener("input", () => {
+        suggestBtn.disabled = suggestionInput.value.trim() === "";
+      });
+
+      document.querySelector("form[action='/suggest']").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        fetch("/suggest", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `suggestion=${encodeURIComponent(suggestionInput.value.trim())}`
+        })
+        .then(() => {
+          suggestionInput.value = "";
+          suggestBtn.disabled = true;
+
+          const message = document.createElement("p");
+          message.textContent = "✅ Suggestion submitted!";
+          message.style.color = "green";
+          message.style.fontWeight = "bold";
+          message.style.textAlign = "center";
+
+          suggestBtn.parentElement.appendChild(message);
+
+          setTimeout(() => {
+            message.remove();
+          }, 3000);
+        });
+      });
+    }
+  </script>
 </body>
 </html>

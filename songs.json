@@ -21,10 +21,10 @@
     "name": "Push",
     "artist": "Matchbox 20",
     "year": "",
-    "selected": true,
-    "tipped": true,
-    "name_submitted": "NIKI",
-    "timestamp": "2025-06-16T18:53:52.619384"
+    "selected": false,
+    "tipped": false,
+    "name_submitted": "",
+    "timestamp": ""
   },
   {
     "name": "Shakin'",
