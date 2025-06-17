@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Song Picker</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>🎶 Pick a Song for Auggy Style</h1>
+
+  <div style="text-align:center; margin-bottom: 15px;">
+    <a href="/?sort=name">🔠 Sort by Title</a> |
+    <a href="/?sort=artist">🎤 Sort by Artist</a>
+  </div>
+
+  <div class="song-list">
+    {% if songs %}
+      {% for song in songs %}
+        <div 
+          class="song-card {% if song.selected %}gray{% else %}green{% endif %}" 
+          onclick="selectSong({{ loop.index0 }}, '{{ song.name }}', {{ 'true' if song.selected else 'false' }})"
+        >
+          <strong>{{ song.name }}</strong>
+          {% if song.artist %}<span class="artist-name">{{ song.artist }}</span>{% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="text-align: center; color: #888;">No songs available yet. Add some in the Admin Panel.</p>
+    {% endif %}
+  </div>
+
+  <div id="confirmation" style="display:none; text-align:center; margin-top: 30px;">
+    <h2 id="selectedSong"></h2>
+    <form method="POST" action="/submit" id="songForm">
+      <input type="hidden" name="song_index" id="songIndex">
+      <input type="hidden" name="tipped" id="tippedValue" value="false">
+      <input type="text" name="name" placeholder="Your Name (optional)" style="margin-bottom: 15px;"><br>
+      <button type="button" onclick="tipBand()">💸 Tip the Band</button>
+      <button type="submit">🎵 Submit Song Request</button>
+    </form>
+  </div>
+
+  <hr style="margin-top: 40px;">
+  <div style="text-align: center;">
+    <h3>🎤 Suggest a Song for the Next Show</h3>
+    <form method="POST" action="/suggest">
+      <input type="text" name="suggestion" placeholder="Enter a song title" style="width: 80%; max-width: 300px; padding: 10px;"><br><br>
+      <button type="submit">➕ Submit Suggestion</button>
+    </form>
+  </div>
+
+  <div style="text-align: center; margin-top: 40px;">
+    <a href="https://AuggyStyle.com" target="_blank" style="text-decoration: none; color: #0078d4;">
+      🌐 Visit AuggyStyle.com
+    </a>
+  </div>
+
+<script>
+  function selectSong(index, name, isSelected) {
+    if (isSelected) {
+      const messages = [
+        "“Nice pick! We’ll queue it up — and nope, you can’t pick it again 😎”",
+        "“Song selected. That one’s taken — no backsies!”",
+        "“Good taste — but it's already in the queue!”",
+        "“You’re too late — somebody else beat you to it!”"
+      ];
+      const random = Math.floor(Math.random() * messages.length);
+      alert(messages[random]);
+      return;
+    }
+
+    document.querySelector('.song-list').style.display = "none";
+    document.getElementById("confirmation").style.display = "block";
+    document.getElementById("songIndex").value = index;
+    document.getElementById("selectedSong").innerText = "🎵 You selected: " + name;
+  }
+
+  function tipBand() {
+    document.getElementById("tippedValue").value = "true";
+    window.open("https://venmo.com/AuggyStyle", "_blank");
+  }
+
+  // 🔁 Update interval set to 10 seconds (10,000 milliseconds)
+  setInterval(() => {
+    if (document.getElementById("confirmation").style.display !== "block") {
+      window.location.reload();
+    }
+  }, 10000);
+</script>
+
+</body>
+</html>

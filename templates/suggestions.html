@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Songs to Learn</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>🎶 Suggestions for Next Show</h1>
+
+  {% if suggestions %}
+    <ul class="queue-list">
+      {% for item in suggestions %}
+        <li>{{ item.text }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p style="text-align: center; color: #777;">No suggestions yet. Encourage your crowd to submit one!</p>
+  {% endif %}
+
+  <script>
+    setInterval(() => {
+      window.location.reload();
+    }, 3000);
+  </script>
+</body>
+</html>

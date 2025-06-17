@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Song Requests</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>🎤 Requested Songs - Newest on top</h1>
+
+  <div style="text-align: center; margin-bottom: 20px;">
+    <a href="/suggestions" target="_blank">📋 View Suggestions</a> |
+    <a href="/admin">🔐 Admin Page</a>
+  </div>
+
+  <ul class="queue-list">
+    {% for song in songs | sort(attribute='timestamp', reverse=true) %}
+      <li>
+        <strong>{{ song.name }}</strong>
+        {% if song.artist %} by {{ song.artist }}{% endif %}
+        {% if song.year %} ({{ song.year }}){% endif %}<br>
+        {% if song.name_submitted %}
+          <small>Requested by {{ song.name_submitted }}</small><br>
+        {% endif %}
+        {% if song.tipped %}
+          <small style="color: green;">💸 Tipped!</small>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <script>
+    setInterval(() => {
+      window.location.reload();
+    }, 3000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Bright Lights",
+    "artist": "Gary Clark Jr",
+    "year": "",
+    "selected": false,
+    "tipped": false,
+    "name_submitted": "",
+    "timestamp": ""
+  },
+  {
+    "name": "Move Along",
+    "artist": "All American Rejects",
+    "year": "",
+    "selected": false,
+    "tipped": false,
+    "name_submitted": "",
+    "timestamp": ""
+  },
+  {
+    "name": "Push",
+    "artist": "Matchbox 20",
+    "year": "",
+    "selected": true,
+    "tipped": true,
+    "name_submitted": "NIKI",
+    "timestamp": "2025-06-16T18:53:52.619384"
+  },
+  {
+    "name": "Shakin'",
+    "artist": "Eddie Money",
+    "year": "",
+    "selected": false,
+    "tipped": false,
+    "name_submitted": "",
+    "timestamp": ""
+  },
+  {
+    "name": "Simple Man",
+    "artist": "Shinedown",
+    "year": "",
+    "selected": false,
+    "tipped": false,
+    "name_submitted": "",
+    "timestamp": ""
+  },
+  {
+    "name": "Song 2",
+    "artist": "Blur",
+    "year": "",
+    "selected": false,
+    "tipped": false,
+    "name_submitted": "",
+    "timestamp": ""
+  },
+  {
+    "name": "The Distance",
+    "artist": "Cake",
+    "year": "",
+    "selected": false,
+    "tipped": false,
+    "name_submitted": "",
+    "timestamp": ""
+  }
+]

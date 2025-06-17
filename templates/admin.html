@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin - Auggy Style Song Picker</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>🛠️ Admin Panel</h1>
+
+  <div style="text-align: center; margin-bottom: 20px;">
+    <a href="/queue">🔙 Back to Queue</a> |
+    <a href="/logout" onclick="return confirm('Log out of admin access?')">🚪 Log Out</a>
+  </div>
+
+  <form method="POST" action="/add-song" style="text-align:center; margin-bottom: 30px;">
+    <h3>Add a New Song</h3>
+    <input type="text" name="new_song" placeholder="Song Title" required><br><br>
+    <input type="text" name="new_artist" placeholder="Artist" required><br><br>
+    <input type="text" name="new_year" placeholder="Year (optional)"><br><br>
+    <button type="submit">➕ Add to Song List</button>
+  </form>
+
+  <hr style="margin: 40px auto; max-width: 500px;">
+
+  <div style="text-align: center; margin-bottom: 30px;">
+    <h3>📄 CSV Song Import</h3>
+    <p>
+      <a href="/static/song_template.csv" download>⬇️ Download CSV Template</a>
+    </p>
+
+    <form method="POST" action="/upload-csv" enctype="multipart/form-data">
+      <input type="file" name="csv_file" accept=".csv" required><br><br>
+      <button type="submit">📤 Upload CSV File</button>
+    </form>
+  </div>
+
+  <form method="POST" action="/reset" style="text-align:center; margin-top: 20px;">
+    <h3>Reset Entire Song List</h3>
+    <button type="submit" onclick="return confirm('Reset the song list? This cannot be undone.')">
+      🔁 Reset Song List
+    </button>
+  </form>
+</body>
+</html>
