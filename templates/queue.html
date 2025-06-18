@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Song Requests</title>
+  <title>Song Queue</title>
   <link rel="stylesheet" href="/static/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <h1>🎤 Requested Songs - Newest on top</h1>
-
-<div style="text-align: center; margin-bottom: 20px;">
-  <a href="/" style="text-decoration: none;">
-    <button style="padding: 10px 20px; font-size: 16px;">⬅️ Back to Song List</button>
-  </a>
-</div>
+  <h1>🎶 Song Queue</h1>
 
   <div style="text-align: center; margin-bottom: 20px;">
-    <a href="/suggestions" target="_blank">📋 View Suggestions</a> |
-    <a href="/admin">🔐 Admin Page</a>
+    <a href="/">⬅️ Back to Song List</a>
   </div>
 
-  <ul class="queue-list">
-    {% for song in songs | sort(attribute='timestamp', reverse=true) %}
-      <li>
-        <strong>{{ song.name }}</strong>
-        {% if song.artist %} by {{ song.artist }}{% endif %}
-        {% if song.year %} ({{ song.year }}){% endif %}<br>
-        {% if song.name_submitted %}
-          <small>Requested by {{ song.name_submitted }}</small><br>
-        {% endif %}
-        {% if song.tipped %}
-          <small style="color: green;">💸 Tipped!</small>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+  {% if songs %}
+    <div style="text-align: center;">
+      <ul class="queue-list">
+        {% for song in songs | sort(attribute='timestamp', reverse=true) %}
+          <li style="margin-bottom: 20px;">
+            <strong>{{ song.name }}</strong>
+            {% if song.artist %} <em>{{ song.artist }}</em>{% endif %}<br>
+            {% if song.name_submitted %}
+              <small>Requested by {{ song.name_submitted }}</small><br>
+            {% endif %}
+            {% if song.tipped %}
+              <small style="color: green;">💸 Tipped!</small>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% else %}
+    <p style="text-align: center; color: #888;">No songs have been selected yet.</p>
+  {% endif %}
+
+  <div style="text-align: center; margin-top: 40px;">
+    <a href="/admin">🔐 Access Admin Page</a>
+  </div>
 
   <script>
     setInterval(() => {

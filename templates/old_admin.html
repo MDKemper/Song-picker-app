@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>🛠️ Admin Panel</h1>
+
+  <div style="text-align: center; margin-bottom: 20px;">
+    <a href="/">🏠 Song List</a>
+  </div>
+
+  <div class="admin-section">
+    <h2>Add a Song</h2>
+    <form method="POST" action="/add-song">
+      <input type="text" name="new_song" placeholder="Song Title" required>
+      <input type="text" name="new_artist" placeholder="Artist" required>
+      <input type="text" name="new_year" placeholder="Year (optional)">
+      <button type="submit">➕ Add Song</button>
+    </form>
+  </div>
+
+  <hr>
+
+  <div class="admin-section">
+    <h2>Upload Songs via CSV</h2>
+    <form method="POST" action="/upload-csv" enctype="multipart/form-data">
+      <input type="file" name="csv_file" accept=".csv" required>
+      <button type="submit">📤 Upload CSV</button>
+    </form>
+    <p><a href="/static/song_template.csv" download>📄 Download CSV Template</a></p>
+  </div>
+
+  <hr>
+
+  <div class="admin-section">
+    <h2>Reset All Selections</h2>
+    <form method="POST" action="/reset" onsubmit="return confirm('Are you sure you want to reset all selections?')">
+      <button type="submit" style="background-color: red; color: white;">🔄 Reset Song List</button>
+    </form>
+  </div>
+
+  <hr>
+
+  <div class="admin-section">
+    <h2>View Song Queue</h2>
+    <a href="/queue">
+      <button>🎵 View Queue</button>
+    </a>
+  </div>
+
+  <div class="admin-section">
+    <h2>View Suggestions</h2>
+    <a href="/suggestions">
+      <button>💡 View Suggestions</button>
+    </a>
+  </div>
+
+  <div class="admin-section">
+    <a href="/logout" onclick="return confirm('Log out of admin access?')">🚪 Log Out</a>
+  </div>
+</body>
+</html>
