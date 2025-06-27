@@ -12,10 +12,10 @@
     "name": "867-5309",
     "artist": "Tommy Tutone",
     "year": "",
-    "selected": true,
+    "selected": false,
     "tipped": false,
     "name_submitted": "",
-    "timestamp": "2025-06-17T16:32:24.979650"
+    "timestamp": ""
   },
   {
     "name": "Ain't No Sunshine",
@@ -63,26 +63,8 @@
     "timestamp": ""
   },
   {
-    "name": "Beauty of Gray",
-    "artist": "Live",
-    "year": "",
-    "selected": false,
-    "tipped": false,
-    "name_submitted": "",
-    "timestamp": ""
-  },
-  {
     "name": "Beverly Hills",
     "artist": "Weezer",
-    "year": "",
-    "selected": false,
-    "tipped": false,
-    "name_submitted": "",
-    "timestamp": ""
-  },
-  {
-    "name": "Black Days",
-    "artist": "Soundgarden",
     "year": "",
     "selected": false,
     "tipped": false,
@@ -180,15 +162,6 @@
     "timestamp": ""
   },
   {
-    "name": "Don't you forget about me",
-    "artist": "Simple Minds",
-    "year": "",
-    "selected": false,
-    "tipped": false,
-    "name_submitted": "",
-    "timestamp": ""
-  },
-  {
     "name": "Drift Away",
     "artist": "Uncle Kracker/Dobie Gray",
     "year": "",
@@ -200,15 +173,6 @@
   {
     "name": "Drive",
     "artist": "Incubus",
-    "year": "",
-    "selected": false,
-    "tipped": false,
-    "name_submitted": "",
-    "timestamp": ""
-  },
-  {
-    "name": "Duck and Run",
-    "artist": "3 Doors Down",
     "year": "",
     "selected": false,
     "tipped": false,
@@ -234,15 +198,6 @@
     "timestamp": ""
   },
   {
-    "name": "Eye of the tiger",
-    "artist": "Survivor",
-    "year": "",
-    "selected": false,
-    "tipped": false,
-    "name_submitted": "",
-    "timestamp": ""
-  },
-  {
     "name": "Fly Like an Eagle",
     "artist": "Steve Miller",
     "year": "",
@@ -254,15 +209,6 @@
   {
     "name": "Foxy Lady",
     "artist": "Jimi Hendrix",
-    "year": "",
-    "selected": false,
-    "tipped": false,
-    "name_submitted": "",
-    "timestamp": ""
-  },
-  {
-    "name": "Get down on it",
-    "artist": "Kool and the Gang",
     "year": "",
     "selected": false,
     "tipped": false,
@@ -414,6 +360,15 @@
     "timestamp": ""
   },
   {
+    "name": "Interstate Love Song",
+    "artist": "Stone Temple Pilots",
+    "year": "",
+    "selected": false,
+    "tipped": false,
+    "name_submitted": "",
+    "timestamp": ""
+  },
+  {
     "name": "Jessies Girl",
     "artist": "Rick Springfield",
     "year": "",
@@ -486,6 +441,15 @@
     "timestamp": ""
   },
   {
+    "name": "Move Along",
+    "artist": "All American Rejects",
+    "year": "",
+    "selected": false,
+    "tipped": false,
+    "name_submitted": "",
+    "timestamp": ""
+  },
+  {
     "name": "Mr. Brightside",
     "artist": "The Killers",
     "year": "",
@@ -497,15 +461,6 @@
   {
     "name": "My Own Worst Enemy",
     "artist": "Lit",
-    "year": "",
-    "selected": false,
-    "tipped": false,
-    "name_submitted": "",
-    "timestamp": ""
-  },
-  {
-    "name": "Never too late",
-    "artist": "3 Days Grace",
     "year": "",
     "selected": false,
     "tipped": false,
@@ -621,15 +576,6 @@
     "timestamp": ""
   },
   {
-    "name": "Shout",
-    "artist": "Tears for Fears",
-    "year": "",
-    "selected": false,
-    "tipped": false,
-    "name_submitted": "",
-    "timestamp": ""
-  },
-  {
     "name": "Simple Man",
     "artist": "Lynyrd Skynyrd/Shinedown",
     "year": "",
@@ -641,15 +587,6 @@
   {
     "name": "Smooth Criminal",
     "artist": "Alien Ant Farm",
-    "year": "",
-    "selected": false,
-    "tipped": false,
-    "name_submitted": "",
-    "timestamp": ""
-  },
-  {
-    "name": "Something in the way",
-    "artist": "Nirvana",
     "year": "",
     "selected": false,
     "tipped": false,
@@ -704,15 +641,6 @@
   {
     "name": "Summer of 69",
     "artist": "Brian Adams",
-    "year": "",
-    "selected": false,
-    "tipped": false,
-    "name_submitted": "",
-    "timestamp": ""
-  },
-  {
-    "name": "Talking in your sleep",
-    "artist": "Romantics",
     "year": "",
     "selected": false,
     "tipped": false,

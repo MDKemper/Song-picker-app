@@ -1,6 +1,10 @@
 [
   {
-    "text": "Smooth Criminal by Alien Ant Farm",
+    "text": "Somebody Told Me - The Killers",
+    "timestamp": "2025-06-16T09:13:42.208785"
+  },
+  {
+    "text": "If You Only Knew - Shinedown",
     "timestamp": "2025-06-16T09:13:42.208785"
   },
   {
@@ -10,10 +14,6 @@
   {
     "text": "Papa Don't Preach",
     "timestamp": "2025-06-17T15:50:56.638854"
-  },
-  {
-    "text": "Interstate Love Song - STP",
-    "timestamp": "2025-06-17T20:26:46.394562"
   },
   {
     "text": "Damnit - Blink 182",
@@ -33,10 +33,6 @@
   },
   {
     "text": "Billie Jean - MJ",
-    "timestamp": "2025-06-17T20:26:46.394562"
-  },
-  {
-    "text": "Move Along - AAR",
     "timestamp": "2025-06-17T20:26:46.394562"
   },
   {
@@ -91,8 +87,4 @@
     "text": "American Woman - Guess Who",
     "timestamp": "2025-06-17T20:26:46.394562"
   },
-  {
-    "text": "Ocean Avenue by Yellowcard",
-    "timestamp": "2025-06-17T16:31:26.918185"
-  }
 ]
