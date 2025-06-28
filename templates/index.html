@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auggy Style - Live Song Request App</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1 style="text-align: center;">🎶 Request a Song for Auggy Style to try!</h1>
+
+  <!-- Countdown Timer -->
+  <div id="countdown" style="text-align:center; margin: 20px; font-size:18px; font-weight:bold;">
+    🔄 Refreshing in 30 seconds...
+  </div>
+
+  <!-- Song List -->
+  <div class="song-list">
+    {% for song in songs %}
+      <div 
+        class="song-card {% if song.selected %}gray{% else %}green{% endif %}" 
+        onclick="selectSong({{ loop.index0 }}, '{{ song.name }}', {{ 'true' if song.selected else 'false' }})"
+      >
+        <strong>{{ song.name }}</strong>
+        {% if song.artist %}
+          <span class="artist-name">{{ song.artist }}</span>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Countdown and Refresh Script -->
+  <script>
+    let countdown = 30;
+    const countdownDisplay = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+      countdown--;
+      countdownDisplay.textContent = `🔄 Refreshing in ${countdown} second${countdown !== 1 ? 's' : ''}...`;
+      if (countdown <= 0) {
+        clearInterval(timer);
+        window.location.reload();
+      }
+    }, 1000); // update every second
+
+    // Optional: Add a basic selectSong function to avoid console errors if missing
+    function selectSong(index, name, selected) {
+      if (!selected) {
+        if (confirm(`Request "${name}"?`)) {
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = '/submit';
+
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'song_index';
+          input.value = index;
+          form.appendChild(input);
+
+          document.body.appendChild(form);
+          form.submit();
+        }
+      } else {
+        alert('This song has already been selected.');
+      }
+    }
+  </script>
+</body>
+</html>
