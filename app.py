@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, session
 import json
 import csv
@@ -13,8 +14,11 @@ SUGGESTIONS_FILE = "suggestions.json"
 # ---------- Helpers ----------
 
 def load_songs():
-    with open(SONG_FILE, "r") as f:
-        return json.load(f)
+    try:
+        with open(SONG_FILE, "r") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
 
 def save_songs(songs):
     with open(SONG_FILE, "w") as f:
@@ -27,7 +31,7 @@ def load_suggestions():
     try:
         with open(SUGGESTIONS_FILE, "r") as f:
             return json.load(f)
-    except json.JSONDecodeError:
+    except (FileNotFoundError, json.JSONDecodeError):
         return []
 
 def save_suggestions(suggestions):
@@ -131,7 +135,6 @@ def upload_csv_form():
 @app.route("/add_song", methods=["GET"])
 def add_song_form():
     return render_template("add_song.html")
-
 
 @app.route("/add-song", methods=["POST"])
 def add_song():
