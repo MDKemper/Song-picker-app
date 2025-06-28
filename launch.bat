@@ -7,7 +7,6 @@ set CHROME="C:\Program Files\Google\Chrome\Application\chrome.exe"
 
 REM Launch both windows
 start "" %CHROME% --new-window http://127.0.0.1:5000/
-start "" %CHROME% --new-window http://127.0.0.1:5000/queue
 
 REM Wait for Chrome windows to open
 timeout /t 2 >nul
