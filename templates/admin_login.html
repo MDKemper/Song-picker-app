@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin - Song Picker</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>🛠️ Admin Panel</h1>
+
+  <div style="text-align: center; margin-bottom: 20px;">
+    <a href="/queue">🔙 Request List</a> |
+    <a href="/logout" onclick="return confirm('Log out of admin access?')">🚪 Log Out</a>
+  </div>
+
+  <form method="POST" action="/add-song" style="text-align:center; margin-bottom: 30px;">
+    <h3>Add a New Song</h3>
+    <input type="text" name="new_song" placeholder="Song Title" required
+           style="padding: 10px; width: 80%; max-width: 320px;"><br><br>
+    <input type="text" name="new_artist" placeholder="Artist" required
+           style="padding: 10px; width: 80%; max-width: 320px;"><br><br>
+    <input type="text" name="new_year" placeholder="Year (optional)"
+           style="padding: 10px; width: 80%; max-width: 320px;"><br><br>
+    <button type="submit">➕ Add to Song List</button>
+  </form>
+
+  <hr style="margin: 40px auto; max-width: 500px;">
+
+  <form method="POST" action="/reset" style="text-align:center; margin-top: 20px;">
+    <h3>Reset the Song List</h3>
+    <button type="submit" onclick="return confirm('Reset the song list? This cannot be undone.')">
+      🔁 Reset Song List
+    </button>
+  </form>
+</body>
+</html>

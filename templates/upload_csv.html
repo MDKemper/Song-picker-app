@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload CSV of Songs</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1 style="text-align:center;">📥 Upload CSV of Songs</h1>
+
+  <form method="POST" action="/upload-csv" enctype="multipart/form-data" style="text-align:center; margin-top: 40px;">
+    <input type="file" name="csv_file" accept=".csv" required style="padding:10px; font-size:16px;"><br><br>
+    <button type="submit" style="padding: 10px 20px; font-size:16px;">🚀 Upload and Preview</button>
+  </form>
+
+  <div style="text-align:center; margin-top: 40px;">
+    <a href="/admin">
+      <button style="padding: 10px 20px; font-size:16px;">⬅️ Back to Admin Panel</button>
+    </a>
+  </div>
+</body>
+</html>

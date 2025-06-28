@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add a New Song</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1 style="text-align:center;">➕ Add a New Song</h1>
+
+  <form method="POST" action="/add-song" style="text-align:center; margin-top: 40px;">
+    <input type="text" name="new_song" placeholder="Song Title" required style="padding:10px; width:80%; max-width:300px;"><br><br>
+    <input type="text" name="new_artist" placeholder="Artist" required style="padding:10px; width:80%; max-width:300px;"><br><br>
+    <input type="text" name="new_year" placeholder="Year (optional)" style="padding:10px; width:80%; max-width:300px;"><br><br>
+    <button type="submit" style="padding:10px 20px; font-size:16px;">✅ Add Song</button>
+  </form>
+
+  <div style="text-align:center; margin-top: 40px;">
+    <a href="/admin">
+      <button style="padding: 10px 20px; font-size:16px;">⬅️ Back to Admin Panel</button>
+    </a>
+  </div>
+</body>
+</html>
