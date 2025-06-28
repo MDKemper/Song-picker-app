@@ -1,141 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Song Picker</title>
+  <title>Auggy Style - Live Song Request App</title>
   <link rel="stylesheet" href="/static/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <h1>🎶 Pick a Song for Auggy Style</h1>
+  <h1 style="text-align: center;">🎶 Request a Song for Auggy Style to try!</h1>
 
-  <div style="text-align:center; margin-bottom: 15px;">
-    <a href="/?sort=name">🔠 Sort by Title</a> |
-    <a href="/?sort=artist">🎤 Sort by Artist</a>
+  <!-- Countdown Timer -->
+  <div id="countdown" style="text-align:center; margin: 20px; font-size:18px; font-weight:bold;">
+    🔄 Refreshing in 30 seconds...
   </div>
 
+  <!-- Song List -->
   <div class="song-list">
-    {% if songs %}
-      {% for song in songs %}
-        <div 
-          class="song-card {% if song.selected %}gray{% else %}green{% endif %}" 
-          onclick="selectSong({{ loop.index0 }}, '{{ song.name }}', {{ 'true' if song.selected else 'false' }})"
-        >
-          <strong>{{ song.name }}</strong>
-          {% if song.artist %}<span class="artist-name">{{ song.artist }}</span>{% endif %}
-        </div>
-      {% endfor %}
-    {% else %}
-      <p style="text-align: center; color: #888;">No songs available yet. Add some in the Admin Panel.</p>
-    {% endif %}
+    {% for song in songs %}
+      <div 
+        class="song-card {% if song.selected %}gray{% else %}green{% endif %}" 
+        onclick="selectSong({{ loop.index0 }}, '{{ song.name }}', {{ 'true' if song.selected else 'false' }})"
+      >
+        <strong>{{ song.name }}</strong>
+        {% if song.artist %}
+          <span class="artist-name">{{ song.artist }}</span>
+        {% endif %}
+      </div>
+    {% endfor %}
   </div>
 
-  <div id="confirmation" style="display:none; text-align:center; margin-top: 30px;">
-    <h2 id="selectedSong"></h2>
-    <form method="POST" action="/submit" id="songForm">
-      <input type="hidden" name="song_index" id="songIndex">
-      <input type="hidden" name="tipped" id="tippedValue" value="false">
-      <input type="text" name="name" placeholder="Your Name (optional)" style="margin-bottom: 15px;"><br>
-      <button type="button" onclick="tipBand()">💸 Tip the Band</button>
-      <button type="submit">🎵 Submit Song Request</button>
-    </form>
-  </div>
-
-  <hr style="margin-top: 40px;">
-  <div style="text-align: center;">
-    <h3>🎤 Suggest a Song for the Next Show</h3>
-    <form method="POST" action="/suggest">
-      <input type="text" name="suggestion" id="suggestionInput" placeholder="Enter a song title" style="width: 80%; max-width: 300px; padding: 10px;"><br><br>
-      <button type="submit" id="suggestBtn" disabled>➕ Submit Suggestion</button>
-    </form>
-  </div>
-
-  <div style="text-align: center; margin-top: 40px;">
-    <a href="https://AuggyStyle.com" target="_blank" style="text-decoration: none; color: #0078d4;">
-      🌐 Visit AuggyStyle.com
-    </a>
-  </div>
-
-  <div style="text-align: center; margin-top: 10px;">
-    <a href="#" onclick="promptAdminLogin()" style="text-decoration: none; color: #0078d4;">
-      🔐 Admin Login
-    </a>
-  </div>
-
+  <!-- Countdown and Refresh Script -->
   <script>
-    function selectSong(index, name, isSelected) {
-      if (isSelected) {
-        const messages = [
-          "“Nice pick! We’ll queue it up — and nope, you can’t pick it again 😎”",
-          "“Song selected. That one’s taken — no backsies!”",
-          "“Good taste — but it's already in the queue!”",
-          "“You’re too late — somebody else beat you to it!”"
-        ];
-        const random = Math.floor(Math.random() * messages.length);
-        alert(messages[random]);
-        return;
-      }
+    let countdown = 30;
+    const countdownDisplay = document.getElementById("countdown");
 
-      document.querySelector('.song-list').style.display = "none";
-      document.getElementById("confirmation").style.display = "block";
-      document.getElementById("songIndex").value = index;
-      document.getElementById("selectedSong").innerText = "🎵 You selected: " + name;
-    }
-
-    function tipBand() {
-      document.getElementById("tippedValue").value = "true";
-      window.open("https://venmo.com/AuggyStyle", "_blank");
-    }
-
-    function promptAdminLogin() {
-      const pin = prompt("Enter Admin PIN:");
-      if (pin) {
-        window.location.href = `/admin?admin_pin=${encodeURIComponent(pin)}`;
-      }
-    }
-
-    // Auto-refresh unless confirmation screen is active
-    setInterval(() => {
-      if (document.getElementById("confirmation").style.display !== "block") {
+    const timer = setInterval(() => {
+      countdown--;
+      countdownDisplay.textContent = `🔄 Refreshing in ${countdown} second${countdown !== 1 ? 's' : ''}...`;
+      if (countdown <= 0) {
+        clearInterval(timer);
         window.location.reload();
       }
-    }, 30000);
+    }, 1000); // update every second
 
-    // Suggestion form logic
-    const suggestionInput = document.getElementById("suggestionInput");
-    const suggestBtn = document.getElementById("suggestBtn");
+    // Optional: Add a basic selectSong function to avoid console errors if missing
+    function selectSong(index, name, selected) {
+      if (!selected) {
+        if (confirm(`Request "${name}"?`)) {
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = '/submit';
 
-    if (suggestionInput && suggestBtn) {
-      suggestBtn.disabled = suggestionInput.value.trim() === "";
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'song_index';
+          input.value = index;
+          form.appendChild(input);
 
-      suggestionInput.addEventListener("input", () => {
-        suggestBtn.disabled = suggestionInput.value.trim() === "";
-      });
-
-      document.querySelector("form[action='/suggest']").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        fetch("/suggest", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: `suggestion=${encodeURIComponent(suggestionInput.value.trim())}`
-        })
-        .then(() => {
-          suggestionInput.value = "";
-          suggestBtn.disabled = true;
-
-          const message = document.createElement("p");
-          message.textContent = "✅ Suggestion submitted!";
-          message.style.color = "green";
-          message.style.fontWeight = "bold";
-          message.style.textAlign = "center";
-
-          suggestBtn.parentElement.appendChild(message);
-
-          setTimeout(() => {
-            message.remove();
-          }, 3000);
-        });
-      });
+          document.body.appendChild(form);
+          form.submit();
+        }
+      } else {
+        alert('This song has already been selected.');
+      }
     }
   </script>
 </body>
