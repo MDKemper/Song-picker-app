@@ -1,9 +1,0 @@
-{% for song in songs %}
-  <div 
-    class="song-card {% if song.selected %}gray{% else %}green{% endif %}" 
-    onclick="selectSong({{ loop.index0 }}, '{{ song.name }}', {{ 'true' if song.selected else 'false' }})"
-  >
-    <strong>{{ song.name }}</strong>
-    {% if song.artist %}<span class="artist-name">{{ song.artist }}</span>{% endif %}
-  </div>
-{% endfor %}
